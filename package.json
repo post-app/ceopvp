@@ -1,0 +1,88 @@
+{
+  "name": "CEOPVP",
+  "main": "main.js",
+  "version": "3.0.2",
+  "description": "CEOPVP",
+  "author": "CEOPVP",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "ntp-time-sync": "^0.1.0"
+  },
+  "devDependencies": {
+    "electron": "^6.0.5",
+    "electron-builder": "~22.8.0"
+  },
+  "build": {
+    "productName": "CEOPVP",
+    "appId": "com.CEOPVP.client",
+    "copyright": "CEOPVP",
+    "directories": {
+      "output": "build"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./favicon.ico",
+      "uninstallerIcon": "./favicon.ico",
+      "installerHeaderIcon": "./favicon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CEOPVP"
+    },
+    "mac": {
+      "icon": "./favicon.icns",
+      "files":["!libs/**","!favicon.ico"],
+      "extraResources": [
+        "./libs/darwin/*"
+      ],
+      "category": "public.app-category.utilities",
+      "artifactName": "${productName}_setup_${version}.${ext}",
+      "target": [
+        {
+          "target": "default",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "${productName} ${version}",
+      "format": "UDBZ",
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "win": {
+      "icon": "./favicon.ico",
+      "files":["!libs/**","!favicon.icns"],
+      "extraResources": [
+        "./libs/win32/*"
+      ],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "dist-win64": "electron-builder --win --x64",
+    "dist-mac": "electron-builder --mac"
+  }
+}
